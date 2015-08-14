@@ -1,0 +1,191 @@
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!--
+
+ Author: Andre-John Mas
+  
+  This is a conversion of Barry Hobson's Thrust HP into
+  a cross platform HTML/Javascript based solution. Feel free
+  to share and improve.
+
+--> 
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+
+<head>
+  <title></title>
+  
+	<style type="text/css">
+	
+	td.label {	  
+	  font-weight: bold;
+	  text-align: right;
+	  padding-right: 10px;
+	}
+	
+	input.readonly {
+	  border-style: none;
+	  background-color: #ffffff;
+	}
+	
+	th {
+	  text-align: left;
+	  background-color: #dddddd;
+	}
+	
+	span.unit {
+	  color: #666666;
+	}
+	
+	td.numeric {
+	  /* text-align: right; */
+	}
+	
+	tr.even {
+	   background-color: #DDDDFF;
+	}
+	</style>  
+</head>
+
+<body onload="initReport();">
+
+<script type="text/javascript" src="js/thrustmath.js"></script>
+<script type="text/javascript" src="js/parameters.js"></script>
+
+<h1>Thrust HP Results</h1>
+
+
+
+
+<div id="staticThrustDiv">
+
+<table>
+
+  <tr><td colspan="2">  
+<h2>Static Thrust</h2>
+  </td></tr>
+  
+  <tr>
+    <td class="label">Propellor Diameter</td>
+    <td><span id="propDiameter">0</span></td>    
+  </tr>
+  
+  <tr>
+    <td class="label">Propellor Pitch</td>
+    <td><span id="propPitch">0</span></td>
+  </tr>
+  
+  <tr>
+    <td class="label">Blade count</td>
+    <td><span id="bladeCount">0</span></td>
+  </tr>
+  
+  <tr>
+    <td class="label">Propeller Type</td>
+    <td><span id="propType">undef</span></td>
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="label">RPM</td>
+    <td><span id="rpm">0</span></td>
+  </tr>
+    
+  <tr>
+    <td colspan="2">&nbsp;</td>
+  </tr>
+  
+  <tr>
+    <td class="label">Load</td>
+    <td><span id="load">0</span></td>
+  </tr>  
+  
+  <tr>
+    <td class="label">Speed</td>
+    <td><span id="speed">0</span><span class="unit" id="speed-unit">MPH</span></td>
+  </tr>  
+    
+  <tr>
+    <td class="label">Horse Power</td>
+    <td><span id="hp">0</span></td>
+  </tr>  
+      
+  <tr>
+    <td colspan="2">&nbsp;</td>
+  </tr>
+        
+  <tr>
+    <td class="label"><label for="airDensity">Air Density</label></td>
+    <td><span id="airDensity">0</span></td>
+  </tr>  
+  
+  <tr>
+    <td class="label"><label for="cf">CF</label></td>
+    <td><span id="cf">0</span></td>
+  </tr> 
+  
+  <tr>
+    <td class="label"><label for="staticThrust">Static Thrust</label></td>
+    <td><span id="staticThrust">0</span><span class="unit" id="staticThrust-unit">lb</span></td>
+  </tr> 
+
+
+  <tr><td colspan="2">  
+<h2>Wing Loading</h2>
+  </td></tr>
+  
+  <tr>
+    <td class="label">Wing Span</td>
+    <td><span id="wingSpan">0</span><span class="unit" id="wingSpan-unit">"</span></td>    
+  </tr>
+  
+  <tr>
+    <td class="label">Root Chord</td>
+    <td><span id="rootChord">0</span><span class="unit" id="rootChord-unit">"</span></td>
+  </tr>
+  
+  <tr>
+    <td class="label">Tip Chord</td>
+    <td><span id="tipChord">0</span><span class="unit" id="tipChord-unit">"</span></td>
+  </tr>
+  
+  <tr>
+    <td class="label">Average Chord</td>
+    <td><span id="avgChord">0</span><span class="unit" id="avgChord-unit">"</span></td>
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="label">Weight</td>
+    <td><span id="weight">0</span> <span class="unit" id="weight-unit">lb</span></td>
+  </tr>
+  
+  <tr>
+    <td class="label">Wing Area</td>
+    <td><span id="wingArea">0</span> <span class="unit" id="wingArea-unit">sq ft</span></td>
+  </tr>  
+  
+  <tr>
+    <td class="label">Wing Loading</td>
+    <td><span id="wingLoading">0</span> <span class="unit" id="speed-unit">oz/sq ft</span></td>
+  </tr>  
+    
+  <tr>
+    <td class="label">Thrust:Weight</td>
+    <td><span id="thrustToWeightRatio">0</span></td>
+  </tr>  
+            
+</table>
+</div>
+
+<h2>Range</h2>
+
+<table style="border-style: solid; border-width: 0.3mm; border-color: #aaaaaa; width: 6cm;" id="resultsTable">
+  <tr><th>RPM</th><th>Speed</th><th>Thrust</th></tr>
+</table>
+</body>
+
+
+</html>
