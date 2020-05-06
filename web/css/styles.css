@@ -1,0 +1,100 @@
+@font-face {
+    font-family: 'icomoon';
+    src:  url('../fonts/icomoon.eot');
+    src:  url('../fonts/icomoon.eot') format('embedded-opentype'),
+      url('../fonts/icomoon.ttf') format('truetype'),
+      url('../fonts/icomoon.woff') format('woff'),
+      url('../fonts/icomoon.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    width: 400px;
+    max-width: 100%;
+    margin: 7px  auto;
+    padding: 0px 20px 20px 20px;
+    border: solid 1px gray;
+    border-radius: 5px;
+    line-height: 130%;
+    box-sizing: border-box;
+  }
+
+
+  @media screen and (max-width: 500px) {
+    body {
+      border: none;
+      width: 100%
+    }
+  }
+
+  label {
+    width: 120px;
+    display: inline-block;
+  }
+
+  input.readonly {
+    /* border-style: none; */
+    background-color: #eeeeee;
+  }
+
+  input, select {
+    border-radius: 3px;
+    border: solid 1px gray;
+    padding: 2px 4px;
+    margin: 3px;
+    background-color: white;
+  }
+
+  .info a {
+    text-decoration: none;
+    color: gray;
+    vertical-align: middle;;
+  }
+
+  .info a:hover {
+    text-decoration: none;
+    color: blue;
+    vertical-align: middle;;
+  }
+
+  [class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .icon-information-outline:before {
+    content: "\e900";
+  }
+
+  .icon-info {
+    font-family: icomoon;
+  }
+
+  .row {
+    width: 100%;
+  }
+
+  .row-submit {
+    text-align: right;
+  }
+
+  input[type=submit] {
+    background: rgb(82, 195, 240);
+    color: white;
+    border: none;
+    padding: 5px 20px;
+
+  }

@@ -1,44 +1,42 @@
-<!DOCTYPE html>
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
 <!--
 
  Author: Andre-John Mas
-  
+
   This is a conversion of Barry Hobson's Thrust HP into
   a cross platform HTML/Javascript based solution. Feel free
   to share and improve.
 
 -->
-<html>
 
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
-	
-	<title>Thrust HP</title>
-        
-	<style type="text/css">
-	
-        td.label {
-            width: 100px;
-        }
-	
-        input.readonly {
-            background-color: #eeeeee;
-        }
-	</style>
-	
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+
+<head>
+	<title>Thrust HP (Imperial)</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+
+  <meta name=viewport content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width" />
+
+  <link href="./css/styles.css" rel="stylesheet">
+
 </head>
 
 <body>
 
 
 
+<script type="text/javascript" src="js/thrustmath.js"></script>
 
+<form action="report.html">
 
-<form action="http://ajmas.dyndns.org/apps/thrusthp/imperial/report.html">
-
-<div><input type="hidden" name="units" value="imperial">
-     <input type="hidden" name="displayedPropType" id="displayedPropType" value="APC">
+<div><input type="hidden" name="units" value="imperial"/>
+     <input type="hidden" name="displayedPropType" id="displayedPropType" value=""/>
 </div>
- 
+
 <h1>Thrust HP (Imperial)</h1>
 
 <div id="introDiv">
@@ -49,32 +47,31 @@ AJ Mas. Feel free to improve it, copy it and to share your improvements.</p>
 
 <div id="staticThrustDiv">
 
-<p>Static Thrust | <a href="http://ajmas.dyndns.org/apps/thrusthp/imperial/#" onclick="hide('staticThrustDiv');show('wingLoadingDiv')">Wing Loading</a> | <a href="http://ajmas.dyndns.org/apps/thrusthp/imperial/#" onclick="hide('staticThrustDiv');show('reportDiv');">Report</a></p>
+<p>Static Thrust | <a href="#" onclick="hide('staticThrustDiv');show('wingLoadingDiv')">Wing Loading</a> | <a href="#" onclick="hide('staticThrustDiv');show('reportDiv');">Report</a></p>
 
-<table>
-  <tbody><tr>
-    <td class="label">propeller Diameter</td>
-    <td><input type="text" name="propDiameter" id="propDiameter" value="0" onblur="calculateStaticThrust();"></td>    
-  </tr>
-  
-  <tr>
-    <td class="label">Blade Pitch<sup><a href="http://en.wikipedia.org/wiki/Blade_pitch">?</a></sup></td>
-    <td><input type="text" name="propPitch" id="propPitch" value="0" onblur="calculateStaticThrust();"></td>
-  </tr>
-  
-  <tr>
-    <td class="label">Blade count</td>
-    <td><select name="bladeCount" id="bladeCount" onchange="calculateStaticThrust();">
+  <div class="row">
+    <label>Propeller</label>
+    <input type="text" name="propDiameter" id="propDiameter" value="0" onblur="calculateStaticThrust();"/>
+  </div>
+
+  <div class="row">
+    <label>Blade Pitch <span class="info"><a href="http://en.wikipedia.org/wiki/Blade_pitch"><span class="icon-information-outline"></span></a></span></label>
+    <input type="text" name="propPitch" id="propPitch" value="0" onblur="calculateStaticThrust();"/>
+  </div>
+
+  <div class="row">
+    <label>Blade count</label>
+    <select name="bladeCount" id="bladeCount" onchange="calculateStaticThrust();">
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
         </select>
-    </td>
-  </tr>
-  
-  <tr>
-    <td class="label">Blade Type</td>
-    <td><select name="propType" id="propType" onchange="changePropellerType();calculateStaticThrust();">
+
+  </div>
+
+  <div class="row">
+    <label>Blade Type</label>
+    <select name="propType" id="propType" onchange="changePropellerType();calculateStaticThrust();">
             <option value="1.06">APC</option>
             <option value="1.00">Zinger,Wood</option>
             <option value="1.00">Master Airscrew</option>
@@ -83,156 +80,147 @@ AJ Mas. Feel free to improve it, copy it and to share your improvements.</p>
             <option value="1.02">Smart</option>
             <option value="cust">Custom</option>
         </select>
-    </td>
-  </tr>
-  
-  <tr>
-    <td class="label"><label for="rpm">RPM</label><sup><a href="http://en.wikipedia.org/wiki/RPM">?</a></sup></td>
-    <td><input type="text" name="rpm" size="8" value="0" id="rpm" onblur="calculateStaticThrust();"></td>
-  </tr>
-    
-  <tr>
-    <td colspan="2">&nbsp;</td>
-  </tr>
-  
-  <tr>
-    <td class="label">Load</td>
-    <td><input type="text" name="load" value="0" id="load" readonly="readonly" class="readonly"></td>
-  </tr>  
-  
-  <tr>
-    <td class="label">Speed</td>
-    <td><input type="text" name="speed" value="0" id="speed" readonly="readonly" class="readonly"></td>
-    <td class="unit">MPH</td>
-  </tr>  
-    
-  <tr>
-    <!-- Horse power the engine needs to provide -->
-    <td class="label"><label for="hp">Horse Power</label><sup><a href="http://en.wikipedia.org/wiki/Horse_power">?</a></sup></td>
-    <td><input type="text" name="hp" id="hp" value="0" readonly="readonly" class="readonly"></td>
-  </tr>  
-      
-  <tr>
-    <td colspan="2">&nbsp;</td>
-  </tr>
-        
-  <tr>
-    <td class="label"><label for="airDensity">Air Density</label><sup><a href="http://en.wikipedia.org/wiki/Air_density">?</a></sup></td>
-    <td><input type="text" name="airDensity" id="airDensity" value="29.92" onblur="calculateStaticThrust();"></td>
-    <td class="unit">Hg</td>
-  </tr>  
-  
-  <tr>
-    <td class="label"><label for="cf">CF</label></td>
-    <td><input type="text" name="cf" id="cf" value="0" onblur="calculateStaticThrust();" class="readonly" readonly=""></td>
-  </tr> 
-  
-  <tr>
-    <td class="label"><label for="staticThrust">Static Thrust</label><sup><a href="http://en.wikipedia.org/wiki/Thrust">?</a></sup></td>
-    <td><input type="text" name="staticThrust" id="staticThrust" value="0" readonly="readonly" class="readonly"></td>
-    <td class="unit">lb</td>
-  </tr> 
-    
-</tbody></table>
+
+  </div>
+
+  <div class="row">
+    <label for="rpm">RPM <span class="info"><a href="http://en.wikipedia.org/wiki/RPM"><span class="icon-information-outline"></span></a></span></label>
+    <input type="text" name="rpm" size="8" value="0" id="rpm" onblur="calculateStaticThrust();"/>
+  </div>
+
+  <div class="row">
+    &nbsp;
+  </div>
+
+  <div class="row">
+    <label>Load</label>
+    <input type="text" name="load" value="0" id="load" readonly="readonly" class="readonly"/>
+  </div>
+
+  <div class="row">
+    <label>Speed</label>
+    <input type="text" name="speed" value="0" id="speed" readonly="readonly" class="readonly"/>
+    <span class="unit">MPH</span>
+  </div>
+
+  <div class="row">
+    <label for="hp">Horse Power <span class="info"><a href="http://en.wikipedia.org/wiki/Horse_power"><span class="icon-information-outline"></span></a></span></label>
+    <input type="text" name="hp" id="hp" value="0" readonly="readonly" class="readonly"/>
+  </div>
+
+  <div class="row">
+    &nbsp;
+  </div>
+
+  <div class="row">
+    <label for="airDensity">Air Densit <span class="info"><a href="http://en.wikipedia.org/wiki/Air_density"><span class="icon-information-outline"></span></a></span></label>
+    <input type="text" name="airDensity" id="airDensity" value="29.92" onblur="calculateStaticThrust();"/>
+    <span class="unit">Hg</span>
+  </div>
+
+  <div class="row">
+    <label for="cf">CF</label>
+    <input type="text" name="cf" id="cf" value="0" onblur="calculateStaticThrust();" class="readonly"/>
+  </div>
+
+  <div class="row">
+    <label for="staticThrust">Static Thrust <span class="info"><a href="http://en.wikipedia.org/wiki/Thrust"><span class="icon-information-outline"></span></a></span></label>
+    <input type="text" name="staticThrust" id="staticThrust" value="0" readonly="readonly" class="readonly"/>
+    <span class="unit">lb</span>
+  </div>
 
 </div>
 
-<div id="wingLoadingDiv" style="display: none;">
+<div id="wingLoadingDiv">
 
-<p><a href="http://ajmas.dyndns.org/apps/thrusthp/imperial/#" onclick="hide('wingLoadingDiv');show('staticThrustDiv')">Static Thrust</a> | Wing Loading | <a href="http://ajmas.dyndns.org/apps/thrusthp/imperial/#" onclick="hide('wingLoadingDiv');show('reportDiv');">Report</a></p>
+<p><a href="#" onclick="hide('wingLoadingDiv');show('staticThrustDiv')">Static Thrust</a> | Wing Loading | <a href="#" onclick="hide('wingLoadingDiv');show('reportDiv');">Report</a></p>
 
-<table>
-  <tbody><tr>
-    <td class="label"><label for="wingSpan">Wing span</label></td>
-    <td><input type="text" name="wingSpan" id="wingSpan" class="numeric" value="0" onblur="calculateWingLoading();"></td>
-    <td class="unit">inch</td>
-  </tr>
- 
-  <tr>
-    <td class="label"><label for="rootChord">Root Chord</label></td>
-    <td><input type="text" name="rootChord" id="rootChord" class="numeric" value="0" onblur="calculateWingLoading();"></td>
-    <td class="unit">inch</td>
-  </tr>    
-  
-  <tr>
-    <td class="label"><label for="tipChord">Tip Chord</label></td>
-    <td><input type="text" name="tipChord" id="tipChord" class="numeric" value="0" onblur="calculateWingLoading();"></td>
-    <td class="unit">inch</td>
-  </tr>                 
-     
-  <tr>
-    <td class="label"><label for="avgChord">Avg Chord</label></td>
-    <td><input type="text" name="avgChord" id="avgChord" class="numeric readonly" readonly="readonly" value="0"></td>
-    <td class="unit">inch</td>
-  </tr>  
-       
-  <tr>
-    <td class="label"><label for="weight">Weight</label></td>
-    <td><input type="text" name="weight" id="weight" class="numeric" value="0" onblur="calculateWingLoading();"></td>
-    <td class="unit">lb</td>  
-  </tr> 
-      
-  <tr>
-    <td class="label"><label for="wingArea">Wing Area</label></td>
-    <td><input type="text" name="wingArea" id="wingArea" class="numeric readonly" readonly="readonly" value="0"></td>
-    <td class="unit">sq ft</td>    
-  </tr>  
-  
-  <tr>
-    <td class="label"><label for="wingLoading">Wing Loading</label></td>
-    <td><input type="text" name="wingLoading" id="wingLoading" class="numeric readonly" readonly="readonly" value="0"></td>
-    <td class="unit">oz/sq ft</td>    
-  </tr>  
-  
-  <tr>
-    <td class="label"><label for="thrustToWeightRatio">Thrust:Weight</label></td>
-    <td><input type="text" name="thrustToWeightRatio" id="thrustToWeightRatio" class="numeric readonly" readonly="readonly" value="0"></td>    
-  </tr>    
-    
-</tbody></table>
+  <div class="row">
+    <label for="wingSpan">Wing span</label>
+    <input type="text" name="wingSpan" id="wingSpan"  class="numeric" value="0" onblur="calculateWingLoading();"/>
+    <span class="unit">inch</span>
+  </div>
+
+  <div class="row">
+    <label for="rootChord">Root Chord</label>
+    <input type="text" name="rootChord" id="rootChord" class="numeric" value="0" onblur="calculateWingLoading();"/>
+    <span class="unit">inch</span>
+  </div>
+
+  <div class="row">
+    <label for="tipChord">Tip Chord</label>
+    <input type="text" name="tipChord" id="tipChord"  class="numeric" value="0" onblur="calculateWingLoading();"/>
+    <span class="unit">inch</span>
+  </div>
+
+  <div class="row">
+    <label for="avgChord">Avg Chord</label>
+    <input type="text" name="avgChord" id="avgChord"  class="numeric readonly" readonly="readonly" value="0"/>
+    <span class="unit">inch</span>
+  </div>
+
+  <div class="row">
+    <label for="weight">Weight</label>
+    <input type="text" name="weight" id="weight"  class="numeric" value="0" onblur="calculateWingLoading();"/>
+    <span class="unit">lb</span>
+  </div>
+
+  <div class="row">
+    <label for="wingArea">Wing Area</label>
+    <input type="text" name="wingArea" id="wingArea"  class="numeric readonly" readonly="readonly" value="0"/>
+    <span class="unit">sq ft</span>
+  </div>
+
+  <div class="row">
+    <label for="wingLoading">Wing Loading</label>
+    <input type="text" name="wingLoading" id="wingLoading"  class="numeric readonly"  readonly="readonly" value="0"/>
+    <span class="unit">oz</span>/sq ft
+  </div>
+
+  <div class="row">
+    <label for="thrustToWeightRatio">Thrust:Weight</label>
+    <input type="text" name="thrustToWeightRatio" id="thrustToWeightRatio"  class="numeric readonly" readonly="readonly" value="0"/>
+  </div>
 
 </div>
 
-<div id="reportDiv" style="display: none;">
+<div id="reportDiv">
 
-<p><a href="http://ajmas.dyndns.org/apps/thrusthp/imperial/#" onclick="hide('reportDiv');show('staticThrustDiv')">Static Thrust</a> | <a href="http://ajmas.dyndns.org/apps/thrusthp/imperial/#" onclick="hide('reportDiv');show('wingLoadingDiv')">Wing Loading</a> | Report</p>
+<p><a href="#" onclick="hide('reportDiv');show('staticThrustDiv')">Static Thrust</a> | <a href="#" onclick="hide('reportDiv');show('wingLoadingDiv')">Wing Loading</a> | Report</p>
 
+  <div class="row">
+    <label for"maxRpm">Max RPM</label>
+    <input type="text" name="maxRpm" id="maxRpm" value="11000"/>
+  </div>
 
-<table>
-  <tbody><tr>
-    <td class="label"><label for"maxrpm"="">Max RPM</label></td>
-    <td><input type="text" name="maxRpm" id="maxRpm" value="11000"></td>
-  </tr>
-  
-  <tr>
-    <td class="label"><label for"minrpm"="">Min RPM</label></td>
-    <td><input type="text" name="minRpm" id="minRpm" value="8000"></td>
-  </tr>
-  
-  <tr>
-    <td class="label">Increment</td>
-    <td><input type="text" name="increment" value="100"></td>
-  </tr>
-    
-  <tr>
-    <td class="fieldName">&nbsp;</td>
-    
-  </tr> 
-      
-  <tr>
-    <td class="fieldName"></td>
-    <td style="text-align: right"><input type="submit" value="Generate" id="next"></td>    
-  </tr>   
-</tbody></table>
+  <div class="row">
+    <label for"minRpm">Min RPM</label>
+    <input type="text" name="minRpm" id="minRpm"  value="8000"/>
+  </div>
+
+  <div class="row">
+    <label>Increment</label>
+    <input type="text" name="increment" value="100"/>
+  </div>
+
+  <div class="row">
+    <td class="fieldName">&nbsp;
+
+  </div>
+
+  <div class="row row-submit">
+    <input type="submit" value="Generate" id="next" />
+  </div>
 
 </div>
 
 </form>
 
+<script type="text/javascript">
+  init();
+</script>
+
+</body>
 
 
-
-
-
-
-</body></html>
+</html>
